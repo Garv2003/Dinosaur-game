@@ -87,6 +87,7 @@ function handleLose() {
   setDinoLose();
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true });
+    document.addEventListener("touchstart", handleStart, { once: true });
     startScreenElem.classList.remove("hide");
   }, 100);
 }
@@ -122,7 +123,9 @@ export function setupDino() {
   yVelocity = 0;
   setCustomProperty(dinoElem, "--bottom", 0);
   document.removeEventListener("keydown", onJump);
+  document.removeEventListener("touchstart", onJump);
   document.addEventListener("keydown", onJump);
+  document.addEventListener("touchstart", onJump);
 }
 
 export function updateDino(delta, speedScale) {
