@@ -123,8 +123,8 @@ export function setupDino() {
   yVelocity = 0;
   setCustomProperty(dinoElem, "--bottom", 0);
   document.removeEventListener("keydown", onJump);
-  document.removeEventListener("touchstart", onJump);
   document.addEventListener("keydown", onJump);
+  document.removeEventListener("touchstart", onJump);
   document.addEventListener("touchstart", onJump);
 }
 
@@ -169,10 +169,20 @@ function handleJump(delta) {
 }
 
 function onJump(e) {
-  if (e.code !== "Space" || isJumping || e.code !== "Touch") return;
+  if (
+    (e.code !== "Space" && e.type !== "keydown" && e.type !== "touchstart") ||
+    isJumping
+  ) {
+    return;
+  }
 
-  yVelocity = JUMP_SPEED;
-  isJumping = true;
+  if (e.type === "keydown" && e.code === "Space") {
+    yVelocity = JUMP_SPEED;
+    isJumping = true;
+  } else if (e.type === "touchstart") {
+    yVelocity = JUMP_SPEED;
+    isJumping = true;
+  }
 }
 
 //ground js
