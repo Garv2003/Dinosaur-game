@@ -25,6 +25,7 @@ const startScreenElem = document.querySelector("[data-start]");
 setPixelToWorldScale();
 window.addEventListener("resize", setPixelToWorldScale);
 document.addEventListener("keydown", handleStart, { once: true });
+document.addEventListener("touchstart", handleStart, { once: true });
 
 let lastTime;
 let speedScale;
